@@ -3,35 +3,30 @@ include '../Etudiant/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $codeMatiere = $_POST['codeMatiere'];
-    $nomMatiere = $_POST['Nom Matière'];
-    $coefMatiere = $_POST['Coef Matière'];
-    $departement = $_POST['Département'];
+    $nomMatiere = $_POST['nomMatiere'];
+    $coefMatiere = $_POST['coefMatiere'];
+    $departement = $_POST['codeDep'];
     $semestre = $_POST['semestre'];
-    $option = $_POST['Option'];
-    $nbHeureCI = $_POST["Nb Heure CI"];
+    $option = $_POST['codeOption'];
+    $nbHeureCI = $_POST["nbHeureCI"];
     $nbHeureTP = $_POST["nbHeureTP"];
-    $typeLabo = $_POST["TypeLabo"];
-    $bonus = $_POST["Bonus"];
-    $categories = $_POST["Catègories"];
-    $sousCategories = $_POST["SousCatégories"];
-    $dateDeb = $_POST["DateDeb"];
-    $dateFin = $_POST["DateFin"];
-    $Code_Option  = $_POST["Code_Option "];
+    $typeLabo = $_POST["typeLabo"];
+    $bonus = $_POST["bonus"];
+    $categories = $_POST["categories"];
+    $sousCategories = $_POST["sousCategories"];
+    $dateDeb = $_POST["dateDeb"];
+    $dateFin = $_POST["dateFin"];
 
     if ($dateFin <= $dateDeb) {
-        echo '<script>alert("Erreur : La date de fin doit être supérieure à la date de début")</script>';
-        header('location: indexM.php');
-   
+        echo "Erreur : La date de fin doit être supérieure à la date de début.";
         exit; // Arrêter l'exécution du script si la vérification échoue
     }
 
-    $query = "INSERT INTO matieres (`Code Matière`, `Nom Matière`, `Coef Matière`, `Département`, `Semestre`, `Option`, `Nb Heure CI`, `Nb Heure TP`,`TypeLabo`, `Bonus`, `Catègories`, `SousCatégories`, `DateDeb`, `DateFin`, `CodeDep`, `Code_Option`) 
+    $query = "INSERT INTO matieres (`Code Matière`, `Nom Matière`, `Coef Matière`, `Département`, `Semestre`, `Option`, `Nb Heure CI`, `Nb Heure TP`, `TypeLabo`, `Bonus`, `Catègories`, `SousCatégories`, `DateDeb`, `DateFin`, `CodeDep`, `Code_Option`) 
               VALUES ('$codeMatiere', '$nomMatiere', '$coefMatiere', '$departement', '$semestre', '$option', '$nbHeureCI', '$nbHeureTP', '$typeLabo', '$bonus', '$categories', '$sousCategories', '$dateDeb', '$dateFin', '$departement', '$option')";
 
     if ($connection->query($query) === TRUE) {
-        echo '<script>alert("Matière ajoutée avec succès")</script>';
-        header('location: indexM.php');
-  
+        echo "Matière ajoutée avec succès";
     } else {
         echo "Erreur lors de l'ajout de la matière : " . $connection->error;
     }

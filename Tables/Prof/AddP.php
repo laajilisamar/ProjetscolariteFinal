@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Ajout Professeur</title>
 </head>
 <style>
-<style>
+
     .form-container {
     display: flex;
     justify-content: center;

@@ -1,26 +1,33 @@
 <?php
 include 'connexion.php';
 
-if (isset($_POST['update'])) {
+if(isset($_GET['delete'])){
+    $jourToDelete = $_GET['delete'];
+    $deleteSql = "DELETE FROM JSSD WHERE Jour='$jourToDelete'";
+    if ($conn->query($deleteSql) === TRUE) {
+        echo "Record deleted successfully";
+    } else {
+        echo "Error deleting record: " . $conn->error;
+    }
+}
+
+if(isset($_POST['update'])){
     $jour = $_POST['jour'];
     $seance = $_POST['seance'];
     $salle = $_POST['salle'];
     $ndist = $_POST['ndist'];
     $groupe = $_POST['groupe'];
 
-    // Use prepared statement to prevent SQL injection
-    $updateSql = "UPDATE JSSD SET Séance=?, Salle=?, NDist=?, Groupe=? WHERE Jour=?";
+    $updateSql = "UPDATE JSSD SET Séance='$seance', Salle='$salle', NDist=$ndist, Groupe='$groupe' WHERE Jour='$jour'";
 
-    $stmt = $conn->prepare($updateSql);
-    $stmt->bind_param("ssiss", $seance, $salle, $ndist, $groupe, $jour);
+    if ($conn->query($updateSql) === TRUE) {
+    echo "Record updated successfully";
+} else {
+    echo "Error updating record: " . $conn->error;
+    // You can also log the SQL query for further investigation
+    echo "SQL query: " . $updateSql;
+}
 
-    if ($stmt->execute()) {
-        echo "Record updated successfully";
-    } else {
-        echo "Error updating record: " . $stmt->error;
-    }
-
-    $stmt->close();
 }
 
 // Fetch Seance records
@@ -92,8 +99,7 @@ $result = $conn->query($sql);
         }
     </style>
 </head>
-<a class="btn btn-primary" href="create.php" ><i class="fa-solid fa-file-plus-minus"></i>Ajouter</a>
-<a class="btn btn-primary" href="../index.html"><i class="fa-solid fa-file-plus-minus"></i>Retour</a>
+
 <body>
     <form action="update.php" method="POST">
 

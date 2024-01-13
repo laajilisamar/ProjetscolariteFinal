@@ -200,29 +200,11 @@ if (isset($_GET['MatProf'])) {
                 <label for="prenomArabe">Prénom en Arabe :</label>
                 <input type="text" name="prenomArabe" value="<?php echo $row['PrenomArabe']; ?>"><br>
 
-<label for="lieuNaisArabe">Lieu de naissance en Arabe :</label>
-<input type="text" name="lieuNaisArabe" value="<?php echo $row['LieuNaisArabe']; ?>"><br>
-
-<label for="adresseArabe">Adresse en Arabe :</label>
-<input type="text" name="adresseArabe" value="<?php echo $row['AdresseArabe']; ?>"><br>
-
-<label for="villeArabe">Ville en Arabe :</label>
-<input type="text" name="villeArabe" value="<?php echo $row['VilleArabe']; ?>"><br>
-
-<label for="disponible">Disponible :</label>
-<input type="text" name="disponible" value="<?php echo $row['Disponible']; ?>"><br>
-
-<label for="sousSP">Sous-SP :</label>
-<input type="text" name="sousSP" value="<?php echo $row['SousSP']; ?>"><br>
-
-<label for="etbOrigine">Établissement d'origine :</label>
-<input type="text" name="etbOrigine" value="<?php echo $row['EtbOrigine']; ?>"><br>
 
 <label for="typeEnsg">Type d'enseignement :</label>
 <input type="text" name="typeEnsg" value="<?php echo $row['TypeEnsg']; ?>"><br>
 
-<label for="controlAcces">Contrôle d'accès :</label>
-<input type="text" name="controlAcces" value="<?php echo $row['ControlAcces']; ?>"><br>
+
 <label for="grade">Grade :</label>
 <select name="grade">
     <?php
@@ -232,8 +214,8 @@ if (isset($_GET['MatProf'])) {
 
     // Afficher chaque grade dans le champ de sélection
     while ($grade = $gradesResult->fetch_assoc()) {
-        $selected = ($grade['IdGrade'] == $row['Grade']) ? 'selected' : '';
-        echo "<option value='{$grade['IdGrade']}' $selected>{$grade['NomGrade']}</option>";
+        $selected = ($grade['Grade'] == $row['Grade']) ? 'selected' : '';
+        echo "<option value='{$grade['Grade']}' $selected>{$grade['Grade']}</option>";
     }
     ?>
 </select><br>

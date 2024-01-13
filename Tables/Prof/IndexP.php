@@ -90,14 +90,10 @@ if (!$stmt) {
             <th class="text-center">Email Interne</th>
             <th class="text-center">NomArabe</th>
             <th class="text-center">PrenomArabe</th>
-            <th class="text-center">LieuNaisArabe</th>
-            <th class="text-center">AdresseArabe</th>
-            <th class="text-center">VilleArabe</th>
-            <th class="text-center">Disponible</th>
-            <th class="text-center">SousSP</th>
-            <th class="text-center">EtbOrigine</th>
+
+
             <th class="text-center">TypeEnsg</th>
-            <th class="text-center">ControlAcces</th>
+           
             <th class="text-center">Actions</th>
               
 </tr>
@@ -143,14 +139,8 @@ if (!$stmt) {
             <td><?php echo $ligne['Email_Interne']?></td>
             <td><?php echo $ligne['NomArabe']?></td>
             <td><?php echo $ligne['PrenomArabe']?></td>
-            <td><?php echo $ligne['LieuNaisArabe']?></td>
-            <td><?php echo $ligne['AdresseArabe']?></td>
-            <td><?php echo $ligne['VilleArabe']?></td>
-            <td><?php echo $ligne['Disponible']?></td>
-            <td><?php echo $ligne['SousSP']?></td>
-            <td><?php echo $ligne['EtbOrigine']?></td>
+        
             <td><?php echo $ligne['TypeEnsg']?></td>
-            <td><?php echo $ligne['ControlAcces']?></td>
            
             <td><a class="btn btn-success" href='EditP.php?MatProf=<?php echo $ligne['MatProf']; ?>'>Modifier</a> 
         <a class="btn btn-danger"  href='DeleteP.php?MatProf=<?php echo $ligne['MatProf'];?>'>suprimer</a>

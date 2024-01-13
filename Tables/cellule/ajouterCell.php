@@ -32,7 +32,7 @@ $all_sessions = $result->fetchAll(PDO::FETCH_ASSOC);
 
 
 // Fetch professors
-$sql = "SELECT `Matricule Prof` FROM prof";
+$sql = "SELECT `MatProf` FROM prof";
 $result = $idcon->query($sql);
 $all_profs = $result->fetchAll(PDO::FETCH_ASSOC);
 
@@ -121,8 +121,8 @@ $all_NumMats = $result->fetchAll(PDO::FETCH_ASSOC);
                 <label for='NumProf'>Matricule Prof</label>
                 <select name="NumProf" required>
                     <?php foreach ($all_profs as $prof): ?>
-                        <option value="<?php echo $prof["Matricule Prof"]; ?>">
-                            <?php echo $prof["Matricule Prof"]; ?>
+                        <option value="<?php echo $prof["MatProf"]; ?>">
+                            <?php echo $prof["MatProf"]; ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

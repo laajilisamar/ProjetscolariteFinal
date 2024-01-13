@@ -20,6 +20,7 @@ if ($result) {
 }else {
     echo "Error fetching records: " . $conn->error;
 }
+
 if(isset($_POST['submit'])){
     $jour = $_POST['jour'];
     $seance = $_POST['seance'];
@@ -27,33 +28,21 @@ if(isset($_POST['submit'])){
     $ndist = $_POST['ndist'];
     $groupe = $_POST['groupe'];
 
-    // Use prepared statement to prevent SQL injection
-    $sql = "INSERT INTO JSSD (Jour, Séance, Salle, NDist, Groupe) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO JSSD (Jour, Séance, Salle, NDist, Groupe) VALUES ('$jour', '$seance', '$salle', $ndist, '$groupe')";
 
-    if ($stmt = $conn->prepare($sql)) {
-        // Bind parameters to the statement
-        $stmt->bind_param("ssssi", $jour, $seance, $salle, $ndist, $groupe);
-
-        // Execute the statement
-        if ($stmt->execute()) {
-            $lastInsertedId = $stmt->insert_id;
-            header("Location: update.php?jour=$lastInsertedId");
-            exit();
-        } else {
-            echo "Error creating record: " . $stmt->error;
-        }
-
-        // Close statement
-        $stmt->close();
+    if ($conn->query($sql) === TRUE) {
+        
+        $lastInsertedId = $conn->insert_id;
+        
+        header("Location: update.php?jour=$lastInsertedId");
+        exit(); 
     } else {
-        echo "Error preparing statement: " . $conn->error;
+        echo "Error creating record: " . $conn->error;
     }
 }
 
-else {
-    echo "Error preparing statement: " . $conn->error;
-}
 
+$conn->close();
 ?>
 
 <!DOCTYPE html>

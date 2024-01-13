@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $motif = $_POST['Motif'];
     $typeSeance = $_POST['TypeSeance'];
     $codeClasse = $_POST['CodeClasse'];
-    $codeMatiere = $_POST['CodeMatiere'];
+    $codeMatiere = $_POST['CodeMatiére'];
     $justifier = isset($_POST['justifier']) ? 1 : 0;
 
     // Check if the provided matriculeProf exists in the 'prof' table
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check if the provided CodeMatiere exists in the 'Matieres' table
     $checkMatiereStmt = $pdo->prepare("SELECT * FROM matieres WHERE Code Matière = ?");
-    $checkMatiereStmt->execute([$codeMatiere]);
+    $checkMatiereStmt->execute([$codeMatiére]);
     $matiereExists = $checkMatiereStmt->rowCount() > 0;
 
     if (!$matiereExists) {

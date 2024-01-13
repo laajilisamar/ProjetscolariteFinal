@@ -5,27 +5,24 @@ include '../Etudiant/config.php';
 if (isset($_GET['MatProf'])) {
     $matProfToDelete = $_GET['MatProf'];
 
-    // Supprime d'abord les enregistrements dans la table 'modifgrade'
-    $deleteModifgradeQuery = "DELETE FROM modifgrade WHERE MatProf = '$matProfToDelete'";
+    // Supprime d'abord les enregistrements dans la table 'conges'
+    $deleteCongesQuery = "DELETE FROM conges WHERE MatProf = '$matProfToDelete'";
 
-    if ($connection->query($deleteModifgradeQuery) === TRUE) {
-        // Ensuite, supprime les enregistrements dans la table 'departements'
+    if ($connection->query($deleteCongesQuery) === TRUE) {
+        // Ensuite, supprime d'autres enregistrements liés
+        $deleteModifgradeQuery = "DELETE FROM modifgrade WHERE MatProf = '$matProfToDelete'";
         $deleteDepartementsQuery = "DELETE FROM departements WHERE MatProf = '$matProfToDelete'";
+        $deleteProfQuery = "DELETE FROM prof WHERE MatProf = '$matProfToDelete'";
 
-        if ($connection->query($deleteDepartementsQuery) === TRUE) {
-            // Ensuite, supprime l'enregistrement dans la table 'prof'
-            $deleteProfQuery = "DELETE FROM prof WHERE MatProf = '$matProfToDelete'";
-
-            if ($connection->query($deleteProfQuery) === TRUE) {
-                echo "Enregistrement supprimé avec succès.";
-            } else {
-                echo "Erreur lors de la suppression de l'enregistrement dans la table 'prof': " . $connection->error;
-            }
+        if ($connection->query($deleteModifgradeQuery) === TRUE &&
+            $connection->query($deleteDepartementsQuery) === TRUE &&
+            $connection->query($deleteProfQuery) === TRUE) {
+            echo "Enregistrement supprimé avec succès.";
         } else {
-            echo "Erreur lors de la suppression des enregistrements dans la table 'departements': " . $connection->error;
+            echo "Erreur lors de la suppression des enregistrements : " . $connection->error;
         }
     } else {
-        echo "Erreur lors de la suppression des enregistrements dans la table 'modifgrade': " . $connection->error;
+        echo "Erreur lors de la suppression des enregistrements dans la table 'conges': " . $connection->error;
     }
 } else {
     echo "Paramètre MatProf non spécifié.";

@@ -11,9 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $annea = $_POST['Annea'];
     $anneab = $_POST['Anneab'];
     $semAb = $_POST['SemAb'];
+    $sql = "INSERT INTO `session` (`Annee`, `Sem`, `Debut`, `Fin`, `Debsem`, `Finsem`, `Annea`, `Anneab`, `SemAb`) 
+    VALUES ('$annee', '$sem', '$debut', '$fin', '$debsem', '$finsem', '$annea', '$anneab', '$semAb')";
 
-    $sql = "INSERT INTO `session` (Annee, Sem, Debut, Fin, Debsem, Finsem, Annea, Anneab, SemAb) 
-            VALUES ('$annee', '$sem', '$debut', '$fin', '$debsem', '$finsem', '$annea', '$anneab', '$semAb')";
     
     if ($conn->query($sql) === TRUE) {
         header("Location: index.php"); // Redirect to index after successful insert

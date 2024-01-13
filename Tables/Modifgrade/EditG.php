@@ -1,5 +1,3 @@
-<!-- edit.php -->
-
 <?php
 include '../Etudiant/config.php';
 
@@ -17,12 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $DateNomin = $_POST['DateNomin'];
     $MatProf = $_POST['MatProf'];
 
-    // Prepare SQL query for update
     $sql = "UPDATE modifgrade
-            SET Grade = :Grade,
-                DateNomin = :DateNomin,
-                MatProf = :MatProf
-            WHERE NGmodif = :NGmodif";
+    SET Grade = :Grade,
+        DateNomin = :DateNomin,
+        MatProf = :MatProf
+    WHERE NGmodif = :NGmodif"; 
 
     $stmt = $pdo->prepare($sql);
 
@@ -46,11 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_GET['NGmodif'])) {
         $NGmodif = $_GET['NGmodif'];
 
-        // Fetch the record based on NGmodif
-        $query = "SELECT * FROM  modifgrade WHERE NGmodif = :NGmodif";
+        $query = "SELECT * FROM modifgrade WHERE NGmodif = :NGmodif";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':NGmodif ', $NGmodif, PDO::PARAM_INT);
+        $stmt->bindParam(':NGmodif', $NGmodif, PDO::PARAM_INT);  // Remove the space after ':NGmodif'
         $stmt->execute();
+        
         $record = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Fetch available grades for the selection dropdown
